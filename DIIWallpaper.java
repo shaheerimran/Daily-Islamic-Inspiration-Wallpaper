@@ -7,6 +7,7 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import javax.script.ScriptEngineFactory;
 import java.lang.Math;
+import com.sun.jna.Library;
 
 public class DIIWallpaper {
 
@@ -59,7 +60,7 @@ public class DIIWallpaper {
 
         try{
 
-          User32.INSTANCE.SystemParametersInfo(0x0014, 0, wallpaper, 1);
+          User32.INSTANCE.SystemParametersInfo(0x0014, 0, wallpaper_path, 1);
 
         } catch (Exception ex) {
 

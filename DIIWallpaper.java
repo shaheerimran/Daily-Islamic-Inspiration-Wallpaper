@@ -1,10 +1,12 @@
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.File;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import javax.script.ScriptEngineFactory;
+import java.lang.Math;
 
 public class DIIWallpaper {
 
@@ -12,21 +14,28 @@ public class DIIWallpaper {
 
   public static void main(String[] args) {
 
-    //Changes wallpaper to the Ayah talking about the Mercy to the Worlds (SAWS)
-    changeWallpaper("/Users/shaheer/Documents/GitHub/Daily-Islamic-Inspiration-Wallpaper/Wallpapers/Ayah-Mercy-To-Worlds.png");
+    //Changes wallpaper to randomly selected wallpaper
+    changeWallpaper();
 
   }
 
   //Change wallpaper to file specified by path
-  public static void changeWallpaper(String path) {
+  public static void changeWallpaper() {
 
     //For Mac
     if(isMac()){
 
+      String wallpapers_path = System.getProperty("user.dir") + "/Wallpapers"; //Wallpapers folder path
+      File directoryPath = new File(wallpapers_path); //Gets File object of current working directory
+      String contents[] = directoryPath.list(); //Gets String array of Filenames in Wallpapers
+
+      int wallpaper_selection = (int) (Math.random() * contents.length);
+      String wallpaper_path = wallpapers_path + "/" + contents[wallpaper_selection];
+
       try {
 
           ProcessBuilder pb = new ProcessBuilder("osascript", "-e",
-              "tell application \"Finder\" to set desktop picture to POSIX file \"" + path + "\"");
+              "tell application \"Finder\" to set desktop picture to POSIX file \"" + wallpaper_path + "\"");
           Process p = pb.start();
 
       } catch (Exception ex) {
@@ -37,17 +46,15 @@ public class DIIWallpaper {
 
     } else if(isWindows()){ //For Windows
 
+        String wallpapers_path = System.getProperty("user.dir") + "\\Wallpapers"; //Wallpapers folder path
+        File directoryPath = new File(wallpapers_path); //Gets File object of current working directory
+        String contents[] = directoryPath.list(); //Gets String array of Filenames in Wallpapers
+
+        int wallpaper_selection = (int) (Math.random() * contents.length);
+        String wallpaper = wallpapers_path + "\\" + contents[wallpaper_selection];
+
         try{
-
-          ProcessBuilder pb = new ProcessBuilder("reg", "add", "\"HKEY_CURRENT_USER\\Control Panel\\Desktop\"", "/v", "Wallpaper", "/t", "REG_SZ", "/d ", path, "/f");
-          Process p = pb.start;
-          ProcessBuilder pbt = new ProcessBuilder("RUNDLL32.EXE", "user32.dll,UpdatePerUserSystemParameters");
-          Process pt = pbt.start;
-
-          /*String command1 = "reg add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d  " + path + " /f";
-   	      String command2 = "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters";
-          Process process1 = Runtime.getRuntime().exec(command1);
-          Process process2 = Runtime.getRuntime().exec(command2);*/
+          
 
         } catch (Exception ex) {
 

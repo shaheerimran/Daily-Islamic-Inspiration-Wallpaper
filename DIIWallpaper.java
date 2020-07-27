@@ -15,7 +15,7 @@ public class DIIWallpaper {
   public static void main(String[] args) {
 
 
-    changeWallpaper("C:\\Users\\yusufpc\\Pictures\\Hadith-Intentions.png");
+    changeWallpaper();
 
   }
   public static interface User32 extends Library {
@@ -24,7 +24,7 @@ public class DIIWallpaper {
   }
 
   //Change wallpaper to file specified by path
-  public static void changeWallpaper(String path) {
+  public static void changeWallpaper() {
 
     //For Mac
     if(isMac()){
@@ -59,7 +59,7 @@ public class DIIWallpaper {
 
         try{
 
-          User32.INSTANCE.SystemParametersInfo(0x0014, 0, wallpaper , 1);
+          User32.INSTANCE.SystemParametersInfo(0x0014, 0, wallpaper, 1);
 
         } catch (Exception ex) {
 

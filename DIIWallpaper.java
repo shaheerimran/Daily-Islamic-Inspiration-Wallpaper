@@ -15,7 +15,6 @@ public class DIIWallpaper {
 
   public static void main(String[] args) {
 
-
     changeWallpaper();
 
   }

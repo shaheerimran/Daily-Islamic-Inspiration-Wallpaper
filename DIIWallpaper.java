@@ -1,20 +1,12 @@
 import java.io.IOException;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.io.File;
 import javax.script.ScriptEngineManager;
 import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import javax.script.ScriptEngineFactory;
-import com.sun.jna.Library;
-import com.sun.jna.Native;
-import com.sun.jna.win32.W32APIOptions;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
- 
-import javax.imageio.ImageIO;
+import java.lang.Math;
 
 public class DIIWallpaper {
 
@@ -28,7 +20,7 @@ public class DIIWallpaper {
     g.setFont(g.getFont().deriveFont(30f));
     g.drawString("Hello World!", 100, 100);
     g.dispose();
-      
+
     //Changes wallpaper to the Ayah talking about the Mercy to the Worlds (SAWS)
     changeWallpaper("C:\\Users\\yusufpc\\Pictures\\Hadith-Intentions.png");
 
@@ -46,7 +38,7 @@ public class DIIWallpaper {
       try {
 
           ProcessBuilder pb = new ProcessBuilder("osascript", "-e",
-              "tell application \"Finder\" to set desktop picture to POSIX file \"" + path + "\"");
+              "tell application \"Finder\" to set desktop picture to POSIX file \"" + wallpaper_path + "\"");
           Process p = pb.start();
 
       } catch (Exception ex) {
@@ -58,7 +50,7 @@ public class DIIWallpaper {
     } else if(isWindows()){ //For Windows
 
         try{        
-          User32.INSTANCE.SystemParametersInfo(0x0014, 0, path , 1);          
+          User32.INSTANCE.SystemParametersInfo(0x0014, 0, path , 1);
         } catch (Exception ex) {
 
           ex.printStackTrace();

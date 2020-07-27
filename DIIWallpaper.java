@@ -13,7 +13,8 @@ public class DIIWallpaper {
   private static String OS = System.getProperty("os.name").toLowerCase(); //The OS of the computer we're using
 
   public static void main(String[] args) {
-    //Changes wallpaper to the Ayah talking about the Mercy to the Worlds (SAWS)
+
+
     changeWallpaper("C:\\Users\\yusufpc\\Pictures\\Hadith-Intentions.png");
 
   }
@@ -21,20 +22,21 @@ public class DIIWallpaper {
         User32 INSTANCE = (User32) Native.loadLibrary("user32",User32.class,W32APIOptions.DEFAULT_OPTIONS);
         boolean SystemParametersInfo (int one, int two, String s ,int three);
   }
+
   //Change wallpaper to file specified by path
   public static void changeWallpaper(String path) {
 
     //For Mac
     if(isMac()){
 
+      String wallpapers_path = System.getProperty("user.dir") + "/Wallpapers";
+      File directoryPath = new File(wallpapers_path);
+      String contents[] = directoryPath.list();
+
+      int wallpaper = (int) (contents.length * Math.random());
+      String wallpaper_path = wallpapers_path + "/" + contents[wallpaper];
+
       try {
-
-          String wallpapers_path = System.getProperty("user.dir") + "/";
-          File directoryPath = new File(wallpapers_path);
-          String contents[] = directoryPath.list();
-
-          int wallpaper = (int) contents.length * Math.random();
-          String wallpaper_path = wallpapers_path + "/" + contents[wallpaper];
 
           ProcessBuilder pb = new ProcessBuilder("osascript", "-e",
               "tell application \"Finder\" to set desktop picture to POSIX file \"" + wallpaper_path + "\"");
@@ -48,15 +50,17 @@ public class DIIWallpaper {
 
     } else if(isWindows()){ //For Windows
 
-      String wallpapers_path = System.getProperty("user.dir") + "\\";
+      String wallpapers_path = System.getProperty("user.dir") + "\\Wallpapers";
       File directoryPath = new File(wallpapers_path);
       String contents[] = directoryPath.list();
 
-      int wallpaper = (int) contents.length * Math.random();
+      int wallpaper = (int) (contents.length * Math.random());
       String wallpaper_path = wallpapers_path + "\\" + contents[wallpaper];
 
         try{
+
           User32.INSTANCE.SystemParametersInfo(0x0014, 0, wallpaper , 1);
+
         } catch (Exception ex) {
 
           ex.printStackTrace();

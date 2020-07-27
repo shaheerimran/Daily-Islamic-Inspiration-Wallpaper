@@ -20,6 +20,7 @@ public class DIIWallpaper {
 
   //Change wallpaper to file specified by path
   public static void changeWallpaper(String path) {
+    //For Mac
     if(isMac()){
       try {
           ProcessBuilder pb = new ProcessBuilder("osascript", "-e",
@@ -29,30 +30,24 @@ public class DIIWallpaper {
           ex.printStackTrace();
       }
     }
+    //For Windows
     else if(isWindows()){
       try{
-        //ADD CODE FOR CHANGING WALLPAPER ON WINDOWS THROUGHT COMMAND PROMPT
+
+        String command1 = "reg add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d  " + path + " /f";
+   	    String command2 = "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters";
+        Process process1 = Runtime.getRuntime().exec(command1);
+        Process process2 = Runtime.getRuntime().exec(command2);
+
       } catch (Exception ex) {
         ex.printStackTrace();
       }
     }
+    //Error message if any other operating system
     else{
       System.out.println("Daily Islamic Inspiration Wallpaper currently does not support your OS");
     }
 
-  }
-  public static void changeWindowsWallpaper(String path) {
-	String command1 = "reg add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d  C:\\Users\\yusufpc\\Downloads\testbackground1.bmp /f";
-	String command2 = "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters";
- 
-	try {
-		Process process1 = Runtime.getRuntime().exec(command1);
-		Process process2 = Runtime.getRuntime().exec(command2);
-	 
-	 
-	} catch (IOException e) {
-		e.printStackTrace();
-	}
   }
 
   //Checks if computer uses Windows
@@ -70,4 +65,3 @@ public class DIIWallpaper {
 	}
 
 }
-

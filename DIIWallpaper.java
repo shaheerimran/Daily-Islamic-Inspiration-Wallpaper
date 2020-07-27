@@ -8,8 +8,7 @@ import javax.script.ScriptEngineFactory;
 
 public class DIIWallpaper {
 
-  //The OS of the computer we're using
-  private static String OS = System.getProperty("os.name").toLowerCase();
+  private static String OS = System.getProperty("os.name").toLowerCase(); //The OS of the computer we're using
 
   public static void main(String[] args) {
 
@@ -20,32 +19,46 @@ public class DIIWallpaper {
 
   //Change wallpaper to file specified by path
   public static void changeWallpaper(String path) {
+
     //For Mac
     if(isMac()){
+
       try {
+
           ProcessBuilder pb = new ProcessBuilder("osascript", "-e",
               "tell application \"Finder\" to set desktop picture to POSIX file \"" + path + "\"");
           Process p = pb.start();
+
       } catch (Exception ex) {
+
           ex.printStackTrace();
-      }
-    }
-    //For Windows
-    else if(isWindows()){
-      try{
 
-        String command1 = "reg add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d  " + path + " /f";
-   	    String command2 = "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters";
-        Process process1 = Runtime.getRuntime().exec(command1);
-        Process process2 = Runtime.getRuntime().exec(command2);
-
-      } catch (Exception ex) {
-        ex.printStackTrace();
       }
-    }
-    //Error message if any other operating system
-    else{
+
+    } else if(isWindows()){ //For Windows
+
+        try{
+
+          ProcessBuilder pb = new ProcessBuilder("reg", "add", "\"HKEY_CURRENT_USER\\Control Panel\\Desktop\"", "/v", "Wallpaper", "/t", "REG_SZ", "/d ", path, "/f");
+          Process p = pb.start;
+          ProcessBuilder pbt = new ProcessBuilder("RUNDLL32.EXE", "user32.dll,UpdatePerUserSystemParameters");
+          Process pt = pbt.start;
+
+          /*String command1 = "reg add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d  " + path + " /f";
+   	      String command2 = "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters";
+          Process process1 = Runtime.getRuntime().exec(command1);
+          Process process2 = Runtime.getRuntime().exec(command2);*/
+
+        } catch (Exception ex) {
+
+          ex.printStackTrace();
+
+        }
+
+    } else{ //Error message if any other operating system
+
       System.out.println("Daily Islamic Inspiration Wallpaper currently does not support your OS");
+
     }
 
   }

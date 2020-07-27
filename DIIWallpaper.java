@@ -26,5 +26,19 @@ public class DIIWallpaper {
         ex.printStackTrace();
     }
   }
+  public static void changeWindowsWallpaper(String path) {
+	String command1 = "reg add \"HKEY_CURRENT_USER\\Control Panel\\Desktop\" /v Wallpaper /t REG_SZ /d  C:\\Users\\yusufpc\\Downloads\testbackground1.bmp /f";
+	String command2 = "RUNDLL32.EXE user32.dll,UpdatePerUserSystemParameters";
+ 
+	try {
+		Process process1 = Runtime.getRuntime().exec(command1);
+		Process process2 = Runtime.getRuntime().exec(command2);
+	 
+	 
+	} catch (IOException e) {
+		e.printStackTrace();
+	}
+  }
 
 }
+

@@ -13,14 +13,6 @@ public class DIIWallpaper {
   private static String OS = System.getProperty("os.name").toLowerCase(); //The OS of the computer we're using
 
   public static void main(String[] args) {
-
-    BufferedImage image = ImageIO.read(new File("C:\\Users\\yusufpc\\Pictures\\Hadith-Intentions.png"));
-
-    Graphics g = image.getGraphics();
-    g.setFont(g.getFont().deriveFont(30f));
-    g.drawString("Hello World!", 100, 100);
-    g.dispose();
-
     //Changes wallpaper to the Ayah talking about the Mercy to the Worlds (SAWS)
     changeWallpaper("C:\\Users\\yusufpc\\Pictures\\Hadith-Intentions.png");
 
@@ -37,6 +29,13 @@ public class DIIWallpaper {
 
       try {
 
+          String wallpapers_path = System.getProperty("user.dir") + "/";
+          File directoryPath = new File(wallpapers_path);
+          String contents[] = directoryPath.list();
+
+          int wallpaper = (int) contents.length * Math.random();
+          String wallpaper_path = wallpapers_path + "/" + contents[wallpaper];
+
           ProcessBuilder pb = new ProcessBuilder("osascript", "-e",
               "tell application \"Finder\" to set desktop picture to POSIX file \"" + wallpaper_path + "\"");
           Process p = pb.start();
@@ -49,8 +48,15 @@ public class DIIWallpaper {
 
     } else if(isWindows()){ //For Windows
 
-        try{        
-          User32.INSTANCE.SystemParametersInfo(0x0014, 0, path , 1);
+      String wallpapers_path = System.getProperty("user.dir") + "\\";
+      File directoryPath = new File(wallpapers_path);
+      String contents[] = directoryPath.list();
+
+      int wallpaper = (int) contents.length * Math.random();
+      String wallpaper_path = wallpapers_path + "\\" + contents[wallpaper];
+
+        try{
+          User32.INSTANCE.SystemParametersInfo(0x0014, 0, wallpaper , 1);
         } catch (Exception ex) {
 
           ex.printStackTrace();

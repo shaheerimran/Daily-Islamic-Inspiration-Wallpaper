@@ -10,10 +10,12 @@ public class DIIWallpaper {
 
   public static void main(String[] args) {
 
+    //Changes wallpaper to the Ayah talking about the Mercy to the Worlds (SAWS)
     changeWallpaper("/Users/shaheer/Documents/GitHub/Daily-Islamic-Inspiration-Wallpaper/Wallpapers/Ayah-Mercy-To-Worlds.png");
 
   }
 
+  //Change wallpaper to file specified by path
   public static void changeWallpaper(String path) {
 
     try {

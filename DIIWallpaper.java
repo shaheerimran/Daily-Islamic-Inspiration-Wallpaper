@@ -7,7 +7,8 @@ import javax.script.ScriptEngine;
 import javax.script.ScriptException;
 import javax.script.ScriptEngineFactory;
 import java.lang.Math;
-import com.sun.jna.Library;
+import com.sun.jna.*;
+
 
 public class DIIWallpaper {
 
@@ -19,8 +20,9 @@ public class DIIWallpaper {
     changeWallpaper();
 
   }
+
   public static interface User32 extends Library {
-        User32 INSTANCE = (User32) Native.loadLibrary("user32",User32.class,W32APIOptions.DEFAULT_OPTIONS);
+        User32 INSTANCE = (User32) Native.loadLibrary("user32", User32.class, W32APIOptions.DEFAULT_OPTIONS);
         boolean SystemParametersInfo (int one, int two, String s ,int three);
   }
 

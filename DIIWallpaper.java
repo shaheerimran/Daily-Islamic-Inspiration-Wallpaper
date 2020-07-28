@@ -8,6 +8,7 @@ import javax.script.ScriptException;
 import javax.script.ScriptEngineFactory;
 import java.lang.Math;
 import com.sun.jna.*;
+import com.sun.jna.win32.W32APIOptions;
 
 
 public class DIIWallpaper {
@@ -15,7 +16,6 @@ public class DIIWallpaper {
   private static String OS = System.getProperty("os.name").toLowerCase(); //The OS of the computer we're using
 
   public static void main(String[] args) {
-
 
     changeWallpaper();
 
